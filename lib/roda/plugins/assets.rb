@@ -591,11 +591,11 @@ class Roda
         def unnest_assets_hash(h)
           case h
           when Hash
-            h.map do |k,v|
+            h.flat_map do |k,v|
               assets = unnest_assets_hash(v)
               assets = assets.map{|x| "#{k}/#{x}"} if roda_class.assets_opts[:group_subdirs]
               assets
-            end.flatten(1)
+            end
           else
             Array(h)
           end
